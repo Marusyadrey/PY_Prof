@@ -1,0 +1,14 @@
+[2026-08-23 12:52:08] flat_generator([[['a'], ['b', 'c']], ['d', 'e', [['f'], 'h'], False], [1, 2, None, [[[[['!']]]]], []]]) -> <generator object flat_generator at 0x1025e8d60>
+[2026-08-23 12:52:08] flat_generator([['a'], ['b', 'c']]) -> <generator object flat_generator at 0x1025e9e40>
+[2026-08-23 12:52:08] flat_generator(['a']) -> <generator object flat_generator at 0x1025e9f30>
+[2026-08-23 12:52:08] flat_generator(['b', 'c']) -> <generator object flat_generator at 0x1025e9f30>
+[2026-08-23 12:52:08] flat_generator(['d', 'e', [['f'], 'h'], False]) -> <generator object flat_generator at 0x1025e9e40>
+[2026-08-23 12:52:08] flat_generator([['f'], 'h']) -> <generator object flat_generator at 0x1025e9f30>
+[2026-08-23 12:52:08] flat_generator(['f']) -> <generator object flat_generator at 0x1025ea020>
+[2026-08-23 12:52:08] flat_generator([1, 2, None, [[[[['!']]]]], []]) -> <generator object flat_generator at 0x1025e9e40>
+[2026-08-23 12:52:08] flat_generator([[[[['!']]]]]) -> <generator object flat_generator at 0x1025e9f30>
+[2026-08-23 12:52:08] flat_generator([[[['!']]]]) -> <generator object flat_generator at 0x1025ea020>
+[2026-08-23 12:52:08] flat_generator([[['!']]]) -> <generator object flat_generator at 0x1025ea110>
+[2026-08-23 12:52:08] flat_generator([['!']]) -> <generator object flat_generator at 0x1025ea200>
+[2026-08-23 12:52:08] flat_generator(['!']) -> <generator object flat_generator at 0x1025ea2f0>
+[2026-08-23 12:52:08] flat_generator([]) -> <generator object flat_generator at 0x1025e9f30>

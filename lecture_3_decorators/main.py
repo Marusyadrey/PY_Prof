@@ -3,15 +3,14 @@ import datetime
 from functools import wraps
 
 # ==========================================
-# Задание 1: простой декоратор logger (пишет в main.log)
+# Задание 1: простой декоратор logger_simple (пишет в main.log)
 # ==========================================
-def logger(old_function):
+def logger_simple(old_function):
     @wraps(old_function)
     def new_function(*args, **kwargs):
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         func_name = old_function.__name__
 
-        # Формируем строку аргументов (чтобы было читаемо в логе)
         args_repr = ", ".join(repr(arg) for arg in args)
         kwargs_repr = ", ".join(f"{k}={v!r}" for k, v in kwargs.items())
         all_args = f"{args_repr}, {kwargs_repr}".strip(", ")
@@ -28,7 +27,7 @@ def logger(old_function):
 
 
 # ==========================================
-# Задание 2: параметризованный декоратор logger(path)
+# Задание 2: параметризованный декоратор logger (пишет в указанный файл)
 # ==========================================
 def logger(path):
     def __logger(old_function):
@@ -54,22 +53,22 @@ def logger(path):
 
 
 # ==========================================
-# Тесты из задания (без изменений)
+# Тесты из задания (с исправленными именами декораторов)
 # ==========================================
 def test_1():
     path = 'main.log'
     if os.path.exists(path):
         os.remove(path)
 
-    @logger
+    @logger_simple
     def hello_world():
         return 'Hello World'
 
-    @logger
+    @logger_simple
     def summator(a, b=0):
         return a + b
 
-    @logger
+    @logger_simple
     def div(a, b):
         return a / b
 
@@ -135,13 +134,9 @@ def test_2():
 # ==========================================
 # Задание 3: применение логгера к функции из предыдущего ДЗ
 # ==========================================
-# Возьмём flat_generator из ДЗ «Iterators. Generators. Yield»
-# и обернём его в параметризованный логгер, чтобы видеть вызовы.
-
 @logger("flat_generator.log")
 def flat_generator(nested_list):
     for item in nested_list:
-        # Важно: не логировать каждый yield отдельно — логгер срабатывает на вызов функции
         if isinstance(item, (list, tuple)) and not isinstance(item, (str, bytes)):
             yield from flat_generator(item)
         else:
@@ -149,25 +144,19 @@ def flat_generator(nested_list):
 
 
 def demo_usage():
-    """Демонстрация: прогоняем flat_generator и смотрим лог."""
     data = [
         [['a'], ['b', 'c']],
         ['d', 'e', [['f'], 'h'], False],
         [1, 2, None, [[[[['!']]]]], []]
     ]
 
-    # flat_generator — это генератор, поэтому логгер запишет вызов, но не каждый yield
     gen = flat_generator(data)
     result = list(gen)
     print("Результат flat_generator:", result)
 
 
 if __name__ == '__main__':
-    # Сначала прогоняем тесты (они должны пройти без ошибок)
     test_1()
     test_2()
-
-    # Затем демонстрация применения к предыдущему ДЗ
     demo_usage()
-
     print("Все тесты пройдены, логи созданы.")
